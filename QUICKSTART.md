@@ -3,7 +3,7 @@
 ## 🚀 5分钟快速使用
 
 ### 前置条件
-- ✅ 确保可以SSH连接到 `192.168.31.240`
+- ✅ 确保可以SSH连接到 `**************`
 - ✅ 远程服务器已安装Docker
 - ✅ 远程服务器可以访问互联网
 
@@ -56,14 +56,14 @@ chmod +x download-packages.sh
 下载完成后,在远程服务器上查看:
 
 ```bash
-ssh root@192.168.31.240 "ls -lh /tmp/offline-packages/*.deb | head -10"
-ssh root@192.168.31.240 "du -sh /tmp/offline-packages"
+ssh root@************** "ls -lh /tmp/offline-packages/*.deb | head -10"
+ssh root@************** "du -sh /tmp/offline-packages"
 ```
 
 复制到本地:
 
 ```bash
-scp -r root@192.168.31.240:/tmp/offline-packages ./ubuntu-offline-packages
+scp -r root@**************:/tmp/offline-packages ./ubuntu-offline-packages
 ```
 
 ---
@@ -109,7 +109,7 @@ PACKAGES="nginx postgresql-12 openjdk-11-jdk redis-server"
 - `download-packages.bat`
 - `download-packages.ps1`
 
-将 `192.168.31.240` 改为你的服务器IP
+将 `**************` 改为你的服务器IP
 
 ---
 
@@ -122,10 +122,10 @@ PACKAGES="nginx postgresql-12 openjdk-11-jdk redis-server"
 **解决**:
 ```bash
 # 测试连接
-ping 192.168.31.240
+ping **************
 
 # 检查SSH服务
-ssh root@192.168.31.240 "echo test"
+ssh root@************** "echo test"
 ```
 
 ### 问题2: Docker未运行
@@ -164,7 +164,7 @@ docker ps
 **解决**:
 ```bash
 # 手动清理
-ssh root@192.168.31.240 "docker stop pkg-downloader && docker rm pkg-downloader"
+ssh root@************** "docker stop pkg-downloader && docker rm pkg-downloader"
 
 # 重新运行脚本
 ```
@@ -228,14 +228,14 @@ javac -version
 
 ```bash
 # 查看远程文件
-ssh root@192.168.31.240 "ls -lh /tmp/offline-packages/"
+ssh root@************** "ls -lh /tmp/offline-packages/"
 
 # 复制单个文件
-scp root@192.168.31.240:/tmp/offline-packages/nginx*.deb .
+scp root@**************:/tmp/offline-packages/nginx*.deb .
 
 # 压缩后传输
-ssh root@192.168.31.240 "cd /tmp && tar czf offline-pkgs.tar.gz offline-packages/"
-scp root@192.168.31.240:/tmp/offline-pkgs.tar.gz .
+ssh root@************** "cd /tmp && tar czf offline-pkgs.tar.gz offline-packages/"
+scp root@**************:/tmp/offline-pkgs.tar.gz .
 
 # 批量安装
 sudo dpkg -i *.deb

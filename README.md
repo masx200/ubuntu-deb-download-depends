@@ -19,7 +19,7 @@
    - 已安装SSH客户端
    - 能够SSH连接到远程服务器
 
-2. **远程服务器 (192.168.31.240)**:
+2. **远程服务器 (**************)**:
    - 已安装Docker
    - SSH服务正在运行
    - 有root访问权限
@@ -48,7 +48,7 @@ chmod +x download-simple.sh
 
 ## 脚本执行流程
 
-1. SSH连接到 `root@192.168.31.240`
+1. SSH连接到 `root@**************`
 2. 在远程服务器上启动Ubuntu Docker容器
 3. 在容器内安装必要工具 (apt-rdepends, wget等)
 4. 添加PostgreSQL官方仓库
@@ -61,14 +61,14 @@ chmod +x download-simple.sh
 ### 1. 查看下载的文件
 
 ```bash
-ssh root@192.168.31.240 'ls -lh /tmp/offline-packages/*.deb | head -20'
-ssh root@192.168.31.240 'du -sh /tmp/offline-packages'
+ssh root@************** 'ls -lh /tmp/offline-packages/*.deb | head -20'
+ssh root@************** 'du -sh /tmp/offline-packages'
 ```
 
 ### 2. 复制到本地机器
 
 ```bash
-scp -r root@192.168.31.240:/tmp/offline-packages ./ubuntu-offline-packages
+scp -r root@**************:/tmp/offline-packages ./ubuntu-offline-packages
 ```
 
 ### 3. 传输到目标离线机器

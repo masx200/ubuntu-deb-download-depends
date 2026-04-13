@@ -3,7 +3,7 @@ chcp 65001 >nul
 REM Ubuntu离线软件包下载工具 - Windows版本
 REM 通过SSH连接到远程服务器，在Docker中下载软件包
 
-set REMOTE_HOST=192.168.31.240
+set REMOTE_HOST=**************
 set REMOTE_USER=root
 
 echo =========================================

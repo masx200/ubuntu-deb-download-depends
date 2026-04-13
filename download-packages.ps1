@@ -1,7 +1,7 @@
 # Ubuntu离线软件包下载工具 - PowerShell版本
 # 通过SSH连接到远程服务器，在Docker中下载软件包
 
-$RemoteHost = "192.168.31.240"
+$RemoteHost = "**************"
 $RemoteUser = "root"
 $DownloadDir = "/tmp/offline-packages"
 
