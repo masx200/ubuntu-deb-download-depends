@@ -21,8 +21,7 @@ WORKDIR /download
 # 预创建目录
 RUN mkdir -p /download /var/lib/apt/lists/partial
 RUN sed -i "s|http://archive.ubuntu.com/ubuntu/|http://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g" /etc/apt/sources.list && \
-    echo "deb https://mirrors.aliyun.com/postgresql/repos/apt ${UBUNTU_CODENAME}-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
-    wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -
+    echo "deb https://mirrors.aliyun.com/postgresql/repos/apt ${UBUNTU_CODENAME}-pgdg main" > /etc/apt/sources.list.d/pgdg.list 
 # ============================================
 # 步骤1: 初始化并安装必要工具
 # ============================================
