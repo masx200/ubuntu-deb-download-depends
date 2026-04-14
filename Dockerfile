@@ -262,35 +262,35 @@ RUN rm -rf /download/*.deb && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get clean
 
-# ============================================
-# 最终镜像
-# ============================================
-FROM ubuntu:22.04
+# # ============================================
+# # 最终镜像
+# # ============================================
+# FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV DEBCONF_NONINTERACTIVE_SEEN=true
+# ENV DEBIAN_FRONTEND=noninteractive
+# ENV DEBCONF_NONINTERACTIVE_SEEN=true
 
-# 从安装阶段复制已安装的系统
-COPY --from=installer / /
+# # 从安装阶段复制已安装的系统
+# COPY --from=installer / /
 
-# 设置入口点信息
-RUN echo "========================================" && \
-    echo "Ubuntu离线软件包镜像已构建完成!" && \
-    echo "========================================" && \
-    echo "已安装的软件包:" && \
-    echo "  - nginx" && \
-    echo "  - postgresql-12" && \
-    echo "  - openjdk-11-jdk" && \
-    echo "" && \
-    echo "验证安装:" && \
-    nginx -v 2>&1 || true && \
-    psql --version 2>&1 || true && \
-    java -version 2>&1 || true && \
-    echo "========================================"
+# # 设置入口点信息
+# RUN echo "========================================" && \
+#     echo "Ubuntu离线软件包镜像已构建完成!" && \
+#     echo "========================================" && \
+#     echo "已安装的软件包:" && \
+#     echo "  - nginx" && \
+#     echo "  - postgresql-12" && \
+#     echo "  - openjdk-11-jdk" && \
+#     echo "" && \
+#     echo "验证安装:" && \
+#     nginx -v 2>&1 || true && \
+#     psql --version 2>&1 || true && \
+#     java -version 2>&1 || true && \
+#     echo "========================================"
 
-# 健康检查
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD pgrep nginx >/dev/null || pgrep postgres >/dev/null || pgrep java >/dev/null || exit 1
+# # 健康检查
+# HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+#     CMD pgrep nginx >/dev/null || pgrep postgres >/dev/null || pgrep java >/dev/null || exit 1
 
-# 默认命令
+# # 默认命令
 CMD ["/bin/bash"]
