@@ -68,7 +68,7 @@ RUN echo "配置PostgreSQL清华源..." && \
     else \
     echo "使用PostgreSQL官方源"; \
     echo "deb https://mirrors.aliyun.com/postgresql/repos/apt ${UBUNTU_CODENAME}-pgdg main" > /etc/apt/sources.list.d/pgdg.list; \
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -; \
+    wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -; \
     fi
 
 # ============================================
@@ -138,7 +138,7 @@ RUN UBUNTU_CODENAME=$(lsb_release -cs) && \
     wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -; \
     else \
     echo "deb https://mirrors.aliyun.com/postgresql/repos/apt ${UBUNTU_CODENAME}-pgdg main" > /etc/apt/sources.list.d/pgdg.list; \
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -; \
+    wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -; \
     fi
 
 # 更新包列表

@@ -157,7 +157,7 @@ EOF
     else
         echo "使用PostgreSQL官方源..."
         sh -c "echo \"deb https://mirrors.aliyun.com/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+        wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -
     fi
 
     echo ""
@@ -302,7 +302,7 @@ SRCEOF
         else
             echo "使用PostgreSQL官方源..."
             sh -c "echo \"deb https://mirrors.aliyun.com/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
-            wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+            wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -
         fi
         
         apt-get update -y
