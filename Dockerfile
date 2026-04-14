@@ -131,7 +131,18 @@ WORKDIR /download
 
 # 预创建目录
 RUN mkdir -p /var/lib/apt/lists/partial
+copy sources.list /etc/apt/sources.list
 
+
+copy ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates \
+    lsb-release \
+    gnupg \
+    wget \
+    apt-rdepends \
+    && rm -rf /var/lib/apt/lists/*
 # ============================================
 # 步骤1: 配置清华源 (用于安装依赖)
 # ============================================
