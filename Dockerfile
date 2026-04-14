@@ -104,8 +104,10 @@ RUN echo "=============================" && \
     echo "=============================" && \
     echo "一次性批量下载所有包..." && \
     echo "=============================" && \
-    cd /download && cat /tmp/all_deps.txt   && \
-    apt-get download $(cat /tmp/all_deps.txt) 2>&1 | tail -5 || true && \
+    # 使用 --print-uris 获取下载地址,通过 wget 下载到 /download
+    apt-get download --print-uris $(cat /tmp/all_deps.txt) 2>/dev/null | \
+    grep -oP "https?://[^\']+" | \
+    xargs -I {} wget -q -P /download {} && \
     echo "" && \
     echo "=============================" && \
     echo "下载完成! 统计信息:" && \
