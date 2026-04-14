@@ -104,7 +104,7 @@ RUN echo "=============================" && \
     echo "=============================" && \
     echo "一次性批量下载所有包..." && \
     echo "=============================" && \
-    cd /download && \
+    cd /download && cat /tmp/all_deps.txt   && \
     apt-get download $(cat /tmp/all_deps.txt) 2>&1 | tail -5 || true && \
     echo "" && \
     echo "=============================" && \
