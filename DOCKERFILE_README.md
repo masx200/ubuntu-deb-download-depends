@@ -105,4 +105,4 @@ docker buildx build --platform linux/amd64,linux/arm64 -t your-image .
 1. **构建时间**: 完整构建约 15-30 分钟
 2. **磁盘空间**: 确保至少 5GB 可用空间
 3. **网络**: 构建过程中需要网络下载依赖
-4. **Ubuntu 版本**: 当前默认 24.04 (jammy)，可修改为其他版本
+4. **Ubuntu 版本**: 当前默认 24.04 (noble)，可修改为其他版本

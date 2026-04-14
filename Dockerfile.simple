@@ -10,7 +10,7 @@ FROM ubuntu:24.04 AS builder
 # 阶段1: 下载软件包
 # ============================================
 ENV DEBIAN_FRONTEND=noninteractive
-ENV UBUNTU_CODENAME=jammy
+ENV UBUNTU_CODENAME=noble
 
 # 配置清华源
 RUN sed -i "s|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g" /etc/apt/sources.list && \
@@ -46,7 +46,7 @@ RUN sed -i "s|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.ed
     apt-get install -y --no-install-recommends \
     wget gnupg2 ca-certificates lsb-release debconf && \
     # 添加PostgreSQL源
-    echo "deb https://mirrors.aliyun.com/postgresql/repos/apt jammy-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
+    echo "deb https://mirrors.aliyun.com/postgresql/repos/apt noble-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add - && \
     apt-get update && \
     # 离线安装
