@@ -77,29 +77,34 @@ RUN echo "配置PostgreSQL清华源..." && \
 RUN apt-get update -y
 
 # ============================================
-# 步骤5: 下载所有软件包及依赖
+# 步骤5: 下载所有软件包及依赖 (优化: 先收集依赖, 一次性下载)
 # ============================================
-# 创建下载脚本
-RUN echo '#!/bin/bash' > /download.sh && \
-    echo 'set -e' >> /download.sh && \
-    echo '' >> /download.sh && \
-    echo 'PACKAGES="'"${PACKAGES}"'"' >> /download.sh && \
-    echo 'cd /download' >> /download.sh && \
-    echo '' >> /download.sh && \
-    echo 'for pkg in $PACKAGES; do' >> /download.sh && \
-    echo '    echo "正在下载: $pkg"' >> /download.sh && \
-    echo '    # 获取所有递归依赖(去重)' >> /download.sh && \
-    echo '    deps=$(apt-rdepends $pkg 2>/dev/null | grep -v "^ " | sort -u)' >> /download.sh && \
-    echo '    for dep in $deps; do' >> /download.sh && \
-    echo '        apt-get download $dep 2>/dev/null || true' >> /download.sh && \
-    echo '    done' >> /download.sh && \
-    echo 'done' >> /download.sh && \
-    echo 'echo "下载完成!"' >> /download.sh && \
-    echo 'ls -lh /download/*.deb | wc -l' >> /download.sh && \
-    chmod +x /download.sh
-
-# 执行下载
-RUN /download.sh
+RUN echo "=============================" && \
+    echo "收集所有递归依赖..." && \
+    echo "=============================" && \
+    ALL_DEPS="" && \
+    for pkg in ${PACKAGES}; do \
+        echo "分析 $pkg 的依赖..."; \
+        DEPS=$(apt-rdepends $pkg 2>/dev/null | grep -v "^ " | sort -u); \
+        ALL_DEPS="$ALL_DEPS $DEPS"; \
+    done && \
+    echo "$ALL_DEPS ${PACKAGES}" | tr ' ' '\n' | sort -u > /tmp/all_deps.txt && \
+    TOTAL=$(wc -l < /tmp/all_deps.txt) && \
+    echo "共收集到 $TOTAL 个唯一包" && \
+    echo "" && \
+    echo "=============================" && \
+    echo "一次性批量下载所有包..." && \
+    echo "=============================" && \
+    cd /download && \
+    apt-get download $(cat /tmp/all_deps.txt) 2>&1 | tail -5 || true && \
+    echo "" && \
+    echo "=============================" && \
+    echo "下载完成! 统计信息:" && \
+    echo "=============================" && \
+    DEB_COUNT=$(ls -1 /download/*.deb 2>/dev/null | wc -l) && \
+    echo "成功下载: $DEB_COUNT 个deb包" && \
+    du -sh /download && \
+    rm -f /tmp/all_deps.txt
 
 # ============================================
 # 阶段二: 离线安装 (使用下载的包)

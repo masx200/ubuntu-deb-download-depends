@@ -138,34 +138,25 @@ SRCEOF
         apt-rdepends \$pkg 2>/dev/null | grep -v '^ ' | sort -u >> \$ALL_DEPS_FILE
     done
     
-    # 再次去重
-    sort -u \$ALL_DEPS_FILE -o \$ALL_DEPS_FILE
-    
-    # 添加主包本身
+    # 添加主包本身，最终去重
     for pkg in $PACKAGES; do
         echo \$pkg >> \$ALL_DEPS_FILE
     done
-    
-    # 最终去重
     sort -u \$ALL_DEPS_FILE -o \$ALL_DEPS_FILE
     
     TOTAL_DEPS=\$(wc -l < \$ALL_DEPS_FILE)
-    echo \"✓ 共收集到 \$TOTAL_DEPS 个包\"
+    echo \"✓ 共收集到 \$TOTAL_DEPS 个唯一包\"
     
     echo ''
     echo '========================================='
-    echo '步骤6: 批量下载所有包 (加速下载)'
+    echo '步骤6: 一次性批量下载所有包 (加速下载)'
     echo '========================================='
     
-    TOTAL=\$(wc -l < \$ALL_DEPS_FILE)
-    echo \"共需下载 \$TOTAL 个包，开始并行下载...\"
+    echo \"共需下载 \$TOTAL_DEPS 个包，开始一次性下载...\"
     echo ''
     
-    # 设置最大并发数
-    MAX_JOBS=16
-    
-    # 使用 xargs 并行下载，每个下载任务指定输出目录到 /download
-    cat \$ALL_DEPS_FILE | xargs -P \$MAX_JOBS -I {} sh -c 'apt-get download {} -o Dir::Cache::Archives=/download 2>/dev/null && echo \"✓ {}\" || echo \"✗ {}\"'
+    # 将所有包名一次性传给 apt-get download，让 apt 自己管理连接复用
+    apt-get download \$(cat \$ALL_DEPS_FILE) 2>&1 | tail -5 || true
     
     echo ''
     echo '========================================='

@@ -10,20 +10,20 @@
 
 ### 脚本工具
 
-| 脚本 | 平台 | 说明 |
-|------|------|------|
-| `download-packages.sh` | Linux/macOS | 主体下载脚本 |
-| `download-packages.bat` | Windows | Windows 批处理版 |
-| `download-packages.ps1` | Windows | PowerShell 版 |
-| `download-remote.sh` | Linux | 远程下载工具 |
-| `download-simple.sh` | Linux | 简化版下载 |
+| 脚本                    | 平台        | 说明             |
+| ----------------------- | ----------- | ---------------- |
+| `download-packages.sh`  | Linux/macOS | 主体下载脚本     |
+| `download-packages.bat` | Windows     | Windows 批处理版 |
+| `download-packages.ps1` | Windows     | PowerShell 版    |
+| `download-remote.sh`    | Linux       | 远程下载工具     |
+| `download-simple.sh`    | Linux       | 简化版下载       |
 
 ### Docker 支持
 
-| 文件 | 说明 |
-|------|------|
-| `Dockerfile` | 完整版多阶段构建 |
-| `Dockerfile.simple` | 简化版 |
+| 文件                | 说明             |
+| ------------------- | ---------------- |
+| `Dockerfile`        | 完整版多阶段构建 |
+| `Dockerfile.simple` | 简化版           |
 
 ## 常用命令
 
@@ -68,10 +68,10 @@ docker run -it ubuntu-offline:latest
 
 ## 环境变量
 
-| 变量 | 说明 | 默认值 |
-|------|------|--------|
+| 变量              | 说明         | 默认值           |
+| ----------------- | ------------ | ---------------- |
 | `DEBIAN_FRONTEND` | 安装交互模式 | `noninteractive` |
-| `MIRROR_URL` | 镜像源地址 | 清华源 |
+| `MIRROR_URL`      | 镜像源地址   | 清华源           |
 
 ## 注意事项
 
