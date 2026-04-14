@@ -150,10 +150,10 @@ EOF
     PGDG_CODENAME=$(lsb_release -cs)
 
     # 尝试使用清华源的PostgreSQL仓库
-    if wget --spider -q "https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt/dists/${PGDG_CODENAME}-pgdg/"; then
+    if wget --spider -q "https://mirrors.aliyun.com/postgresql/repos/apt/dists/${PGDG_CODENAME}-pgdg/"; then
         echo "检测到清华大学PostgreSQL镜像,使用清华源..."
-        sh -c "echo \"deb https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
-        wget --quiet -O - https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -
+        sh -c "echo \"deb https://mirrors.aliyun.com/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
+        wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -
     else
         echo "使用PostgreSQL官方源..."
         sh -c "echo \"deb https://mirrors.aliyun.com/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
@@ -295,10 +295,10 @@ SRCEOF
         PGDG_CODENAME=$(lsb_release -cs)
         
         # 尝试使用清华源的PostgreSQL仓库
-        if wget --spider -q "https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt/dists/${PGDG_CODENAME}-pgdg/"; then
+        if wget --spider -q "https://mirrors.aliyun.com/postgresql/repos/apt/dists/${PGDG_CODENAME}-pgdg/"; then
             echo "检测到清华大学PostgreSQL镜像,使用清华源..."
-            sh -c "echo \"deb https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
-            wget --quiet -O - https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -
+            sh -c "echo \"deb https://mirrors.aliyun.com/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
+            wget --quiet -O - https://mirrors.aliyun.com/postgresql/repos/apt/ACCC4CF8.asc | apt-key add -
         else
             echo "使用PostgreSQL官方源..."
             sh -c "echo \"deb https://mirrors.aliyun.com/postgresql/repos/apt ${PGDG_CODENAME}-pgdg main\" > /etc/apt/sources.list.d/pgdg.list"
