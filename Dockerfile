@@ -25,6 +25,12 @@ RUN sed -i "s|http://archive.ubuntu.com/ubuntu/|http://mirrors.tuna.tsinghua.edu
 # ============================================
 # 步骤1: 初始化并安装必要工具
 # ============================================
+
+
+copy sources.list /etc/apt/sources.list
+
+
+copy ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
     ca-certificates \
