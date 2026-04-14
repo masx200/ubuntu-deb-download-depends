@@ -121,26 +121,34 @@ DOWNLOAD_DIR="/your/custom/path"
 ## 常见问题
 
 ### Q: 下载失败怎么办?
+
 A: 检查以下几点:
+
 - 确保远程服务器可以访问互联网
 - 确认Docker正常运行: `docker ps`
 - 检查SSH连接是否正常
 - 查看容器日志: `docker logs pkg-downloader`
 
 ### Q: 如何重新下载?
+
 A: 直接再次运行脚本即可，脚本会自动清理旧的容器和数据
 
 ### Q: 下载的文件很大怎么办?
+
 A: 这是正常的，完整依赖可能需要几百MB到1GB空间。确保有足够的磁盘空间。
 
 ### Q: 如何在另一台机器上离线安装?
+
 A: 将所有.deb文件复制到目标机器，然后执行:
+
 ```bash
 sudo dpkg -i *.deb
 ```
 
 ### Q: 依赖冲突怎么办?
+
 A: 尝试以下方法:
+
 ```bash
 # 先安装核心包
 sudo dpkg -i package-name.deb
@@ -168,10 +176,12 @@ sudo apt-get install -f -y
 ### 系统兼容性
 
 确保下载环境和目标环境的以下信息一致:
-- Ubuntu版本 (如 20.04, 22.04)
+
+- Ubuntu版本 (如 24.04, 24.04)
 - 系统架构 (amd64, arm64)
 
 可以使用以下命令检查:
+
 ```bash
 lsb_release -a    # 查看Ubuntu版本
 dpkg --print-architecture  # 查看系统架构
@@ -182,16 +192,19 @@ dpkg --print-architecture  # 查看系统架构
 如果上述方法遇到问题，可以使用更专业的apt-offline工具:
 
 ### 在离线机器上:
+
 ```bash
 apt-offline set offline.sig --install-packages nginx postgresql-12 openjdk-11-jdk
 ```
 
 ### 在联网机器上:
+
 ```bash
 apt-offline get offline.sig --bundle offline.zip
 ```
 
 ### 回到离线机器:
+
 ```bash
 apt-offline install offline.zip
 ```

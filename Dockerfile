@@ -6,7 +6,7 @@
 # ============================================
 # 阶段一: 下载软件包
 # ============================================
-FROM ubuntu:22.04 AS downloader
+FROM ubuntu:24.04 AS downloader
 
 # 设置非交互式安装
 ENV DEBIAN_FRONTEND=noninteractive
@@ -45,7 +45,7 @@ RUN echo "配置清华大学镜像源..." && \
     cp /etc/apt/sources.list /etc/apt/sources.list.bak; \
     fi && \
     \
-    # 写入清华源配置 (传统格式,兼容22.04)
+    # 写入清华源配置 (传统格式,兼容24.04)
     cat > /etc/apt/sources.list << EOF
 # 清华源 - Ubuntu 主仓库
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ ${UBUNTU_CODENAME} main restricted universe multiverse
@@ -104,7 +104,7 @@ RUN /download.sh
 # ============================================
 # 阶段二: 离线安装 (使用下载的包)
 # ============================================
-FROM ubuntu:22.04 AS installer
+FROM ubuntu:24.04 AS installer
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
@@ -265,7 +265,7 @@ RUN rm -rf /download/*.deb && \
 # # ============================================
 # # 最终镜像
 # # ============================================
-# FROM ubuntu:22.04
+# FROM ubuntu:24.04
 
 # ENV DEBIAN_FRONTEND=noninteractive
 # ENV DEBCONF_NONINTERACTIVE_SEEN=true

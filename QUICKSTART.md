@@ -3,6 +3,7 @@
 ## 🚀 5分钟快速使用
 
 ### 前置条件
+
 - ✅ 确保可以SSH连接到 `**************`
 - ✅ 远程服务器已安装Docker
 - ✅ 远程服务器可以访问互联网
@@ -10,6 +11,7 @@
 ### ✨ 特性说明
 
 **本脚本已集成清华大学镜像源**,将自动:
+
 - 检测Ubuntu版本并配置对应的清华源
 - 优先使用清华PostgreSQL镜像
 - 大幅提升下载速度(国内用户)
@@ -17,11 +19,13 @@
 ### Windows用户 (推荐)
 
 #### 方法1: 双击运行批处理文件
+
 1. 双击 `download-packages.bat`
 2. 按提示操作
 3. 等待下载完成
 
 #### 方法2: 使用PowerShell
+
 ```powershell
 # 以管理员身份运行PowerShell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -43,6 +47,7 @@ chmod +x download-packages.sh
 ## 📦 下载的软件包
 
 脚本会自动下载以下软件及其**所有依赖**:
+
 - ✅ nginx (Web服务器)
 - ✅ postgresql-12 (PostgreSQL数据库)
 - ✅ openjdk-11-jdk (Java开发工具包)
@@ -104,6 +109,7 @@ PACKAGES="nginx postgresql-12 openjdk-11-jdk redis-server"
 ### 修改远程服务器地址
 
 在所有脚本文件中替换IP地址:
+
 - `download-packages.sh`
 - `download-simple.sh`
 - `download-packages.bat`
@@ -120,6 +126,7 @@ PACKAGES="nginx postgresql-12 openjdk-11-jdk redis-server"
 **症状**: 无法连接到远程服务器
 
 **解决**:
+
 ```bash
 # 测试连接
 ping **************
@@ -133,6 +140,7 @@ ssh root@************** "echo test"
 **症状**: "Docker未安装或未运行"
 
 **解决**:
+
 ```bash
 # 启动Docker
 sudo systemctl start docker
@@ -146,7 +154,8 @@ docker ps
 
 **原因**: 需要从Ubuntu官方仓库下载大量文件
 
-**解决**: 
+**解决**:
+
 - 耐心等待,可能需要10-30分钟
 - 确保网络连接稳定
 
@@ -155,6 +164,7 @@ docker ps
 **症状**: 显示 "无法下载: xxx"
 
 **解决**:
+
 - 这是正常的,某些虚拟包或元数据包不需要下载
 - 只要核心包下载成功即可
 - 检查最终的deb包数量是否合理(应该>100个)
@@ -162,6 +172,7 @@ docker ps
 ### 问题5: 容器启动失败
 
 **解决**:
+
 ```bash
 # 手动清理
 ssh root@************** "docker stop pkg-downloader && docker rm pkg-downloader"
@@ -218,9 +229,10 @@ javac -version
 ## 📞 需要帮助?
 
 如果遇到问题:
+
 1. 查看完整的README.md文档
 2. 检查脚本输出的错误信息
-3. 确认系统版本兼容性 (Ubuntu 20.04/22.04)
+3. 确认系统版本兼容性 (Ubuntu 24.04/24.04)
 
 ---
 
